@@ -1,8 +1,5 @@
 package com.helton.json_place_holder.client;
 
-import java.util.List;
-
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -14,15 +11,21 @@ public class JsonPlaceholderClient {
   private final RestClient restClient;
 
   public JsonPlaceholderClient() {
-    this.restClient = RestClient.create("https://jsonplaceholder.typicode.com");
+    this.restClient = RestClient.create("https://mdn.github.io/learning-area");
   }
 
-  public List<UserDTO> fetchUsers() {
-    return restClient.get()
-        .uri("/users")
-        .retrieve()
-        .body(new ParameterizedTypeReference<List<UserDTO>>() {
-        });
+  // public List<UserDTO> fetchUsers() {
+  //   return restClient.get()
+  //       .uri("/javascript/oojs/json/superheroes.json")
+  //       .retrieve()
+  //       .body(new ParameterizedTypeReference<List<UserDTO>>() {
+  //       });
+  // }
+
+  public UserDTO fetchUsers(){
+    return restClient.get().uri("/javascript/oojs/json/superheroes.json")
+    .retrieve()
+    .body(UserDTO.class);
   }
 
 }
